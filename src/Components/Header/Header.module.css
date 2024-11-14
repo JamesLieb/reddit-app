@@ -1,0 +1,18 @@
+.container {
+display: flex;
+flex-flow: row wrap;
+align-items: center;
+margin: 10px;
+}
+
+.text {
+    text-align: center;
+    margin-left: 30%;
+    font-size: 3rem;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.photo {
+    width:100px;
+    height:100px;
+}
