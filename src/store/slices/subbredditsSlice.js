@@ -5,10 +5,14 @@ const subredditsSlice = createSlice({
   initialState: [],
   reducers: {
     setSubreddits: (state, action) => {
-      return action.payload;
+      state = action.payload;
+      return state;
+    },
+    getSubreddits: (state) => {
+      return state;
     },
   },
 });
 
-export const { setSubreddits } = subredditsSlice.actions;
+export const { setSubreddits, getSubreddits } = subredditsSlice.actions;
 export default subredditsSlice.reducer;
