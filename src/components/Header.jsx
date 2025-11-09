@@ -1,6 +1,6 @@
 import React from "react";
 import RedditLogo from '../Reddit_Logo.png';
-import { SearchBar } from "./SearchBar.jsx";
+import  SearchBar  from "./SearchBar.jsx";
 
 export const Header = () => {
     return (
@@ -11,7 +11,7 @@ export const Header = () => {
             <div className=" -mt-6 text-4xl font-bold text-black-500 text-center"> 
                 Reddit App
             </div>
-            <div>
+            <div className="my-auto py-4">
                 <SearchBar />
             </div>
             

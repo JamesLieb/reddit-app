@@ -1,18 +1,36 @@
 import { createSlice} from "@reduxjs/toolkit";
+import { fetchRedditSearch } from "../thunks/searchThunks";
 
 const subredditsSlice = createSlice({
   name: "subreddits",
-  initialState: [],
+  initialState: {
+    posts: [],
+    loading: false,
+    error: null,
+    searchTerm: ''
+  },
   reducers: {
-    setSubreddits: (state, action) => {
-      state = action.payload;
-      return state;
+    clearResults: (state) => {
+      state.posts = [];
+      state.error = null;
+      state.searchTerm = '';
     },
-    getSubreddits: (state) => {
-      return state;
-    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchRedditSearch.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchRedditSearch.fulfilled, (state, action) => {
+        state.loading = false;
+        state.posts = action.payload;
+      })
+      .addCase(fetchRedditSearch.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
   },
 });
 
-export const { setSubreddits, getSubreddits } = subredditsSlice.actions;
+export const { clearResults } = subredditsSlice.actions;
 export default subredditsSlice.reducer;
