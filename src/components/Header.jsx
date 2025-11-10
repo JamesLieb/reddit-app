@@ -1,20 +1,38 @@
 import React from "react";
 import RedditLogo from '../Reddit_Logo.png';
-import  SearchBar  from "./SearchBar.jsx";
+import SearchBar from "./SearchBar.jsx";
 
 export const Header = () => {
     return (
-        <div className=" items-baseline flex-col border-b-2 border-gray-200 p-4 justify-center">
-            <div>
-                <img className="aspect 3/2 object-cover" src={RedditLogo} alt="Logo" height={100} width={100} />
-            </div>
-            <div className=" -mt-6 text-4xl font-bold text-black-500 text-center"> 
-                Reddit App
-            </div>
-            <div className="my-auto py-4">
-                <SearchBar />
+        <header className="bg-gradient-to-b from-white to-gray-50 border-b-2 border-orange-500 shadow-md sticky top-0 z-50">
+            <div className="max-w-6xl mx-auto px-4 py-6">
+                {/* Logo and Title Section */}
+                <div className="flex items-center justify-center space-x-4 mb-6">
+                    <img 
+                        className="object-contain drop-shadow-lg hover:scale-105 transition-transform duration-300" 
+                        src={RedditLogo} 
+                        alt="Reddit Logo" 
+                        height={80} 
+                        width={80} 
+                    />
+                    <div>
+                        <h1 className="text-5xl font-extrabold bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">
+                            Reddit App
+                        </h1>
+                        <p className="text-sm text-gray-500 mt-1 font-medium tracking-wide">
+                            Explore the Front Page of the Internet
+                        </p>
+                    </div>
+                </div>
+                
+                {/* Search Bar Section */}
+                <div className="mt-4">
+                    <SearchBar />
+                </div>
             </div>
             
-        </div>
+            {/* Decorative bottom accent */}
+            <div className="h-1 bg-gradient-to-r from-transparent via-orange-500 to-transparent"></div>
+        </header>
     )
 };
