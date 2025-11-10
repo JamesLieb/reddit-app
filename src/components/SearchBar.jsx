@@ -9,11 +9,16 @@ export default function SearchBar() {
   
   const [searchTerm, setSearchTerm] = useState('');
 
+ 
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchTerm.trim()) {
       dispatch(fetchRedditSearch(searchTerm));
     }
+  };
+
+  const onClickPopular = () => {
+    dispatch(fetchRedditSearch('popular'));
   };
 
   return (
@@ -30,6 +35,12 @@ export default function SearchBar() {
         <button type="submit" disabled={loading} className='p-10px-20px ml-10px border border-blue-500 bg-blue-500 text-white rounded-4px'>
           {loading ? 'Searching...' : 'Search'}
         </button>
+        </div>
+
+        <div>
+          <button type='submit' disabled={loading} className='p-10px-20px ml-10px border border-blue-500 bg-blue-500 text-white rounded-4px' onClick={onClickPopular}>
+          {loading ? 'Searching...' : 'Popular Posts'}
+          </button>
         </div>
         
         <button 
@@ -66,12 +77,21 @@ export default function SearchBar() {
               />
             )}
 
-            {post.media?(
-              <video controls className='max-w-400px rounded-4px mb-10px'>
-                <source src={post.media} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            ):null}
+            {post.media ? (
+              <div className='relative max-w-300px rounded-4px mb-10px'>
+                <video className='w-full rounded-4px'>
+                  <source src={post.media} type="video/mp4" />
+                </video>
+                <a 
+                  href={`https://reddit.com${post.permalink}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className='absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-lg hover:bg-opacity-60'
+                >
+                  ▶ Watch with audio on Reddit
+                </a>
+              </div>
+            ) : null}
 
             <div className='text-gray-600 text-sm'>
               <p>By u/{post.author}</p>
