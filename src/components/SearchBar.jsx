@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRedditSearch } from './../store/thunks/searchThunks';
+import { fetchRedditPopular } from './../store/thunks/popularThunks';
 import { clearResults } from './../store/slices/subbredditsSlice';
 
 export default function SearchBar() {
@@ -17,7 +18,7 @@ export default function SearchBar() {
   };
 
   const onClickPopular = () => {
-    dispatch(fetchRedditSearch('popular'));
+    dispatch(fetchRedditPopular());
   };
 
   return (
@@ -32,7 +33,7 @@ export default function SearchBar() {
               placeholder="Search Reddit..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSearch(e)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearch(e)}
               className='w-full px-5 py-3 pr-12 border-2 border-gray-300 rounded-full focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-200 transition-all duration-200 shadow-sm'
             />
             <svg className='absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400' fill="none" stroke="currentColor" viewBox="0 0 24 24">

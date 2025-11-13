@@ -1,5 +1,6 @@
 import { createSlice} from "@reduxjs/toolkit";
 import { fetchRedditSearch } from "../thunks/searchThunks";
+import { fetchRedditPopular } from "../thunks/popularThunks";
 
 const subredditsSlice = createSlice({
   name: "subreddits",
@@ -26,6 +27,17 @@ const subredditsSlice = createSlice({
         state.posts = action.payload;
       })
       .addCase(fetchRedditSearch.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(fetchRedditPopular.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchRedditPopular.fulfilled, (state, action) => {
+        state.loading = false;
+        state.posts = action.payload;
+      })
+      .addCase(fetchRedditPopular.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
