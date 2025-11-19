@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { getImageUrl } from '../../helper/IsImage';
+import { isImageUrl } from '../../helper/IsImage';
 // Helper function to check if URL is a direct image
 
 
@@ -22,7 +22,7 @@ export const fetchRedditSearch = createAsyncThunk(
         id: post.data.id,
         title: post.data.title,
         subreddit: post.data.subreddit,
-        url: getImageUrl(post), // Use helper function
+        url: isImageUrl(post), // Use helper function
         media: post.data.media?.reddit_video?.fallback_url || null,
         permalink: post.data.permalink,
         author: post.data.author
