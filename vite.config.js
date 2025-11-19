@@ -13,11 +13,12 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/reddit-api/, ''),
       }
     },
-    test: {
+    
+  },
+  test: {
       globals: true,
       environment: 'jsdom',
-      setupFiles: './src/setupTests.js',
+      setupFiles: './vitest.setup.js',
       css: true,
     }
-  }
 });

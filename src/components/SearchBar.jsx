@@ -25,11 +25,11 @@ export default function SearchBar() {
     <div className='mx-auto px-4 max-w-5xl'>
       {/* Search Controls */}
       <div className='mb-8'>
-        <div className='flex flex-wrap gap-3 items-center justify-center'>
+        <form className='flex flex-wrap gap-3 items-center justify-center' onSubmit={handleSearch}>
           {/* Search Input */}
           <div className='relative flex-1 min-w-[250px] max-w-[400px]'>
             <input
-              type="text"
+              type="search"
               placeholder="Search Reddit..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -105,7 +105,7 @@ export default function SearchBar() {
               </span>
             </button>
           </div>
-        </div>
+        </form>
       </div>
 
       {/* Error Message */}

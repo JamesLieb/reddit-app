@@ -1,6 +1,6 @@
 
 
-const isImageUrl = (url) => {
+export const isImageUrl = (url) => {
   if (!url || url === 'self' || url === 'default' || url === 'nsfw' || url === 'spoiler') {
     return false;
   }
