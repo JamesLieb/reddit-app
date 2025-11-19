@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { isImageUrl } from '../../helper/IsImage';
+import { getImageUrl } from '../../helper/IsImage';
 // Helper function to check if URL is a direct image
 
 
@@ -22,12 +22,12 @@ export const fetchRedditSearch = createAsyncThunk(
         id: post.data.id,
         title: post.data.title,
         subreddit: post.data.subreddit,
-        url: isImageUrl(post), // Use helper function
+        url: getImageUrl(post), // Use helper function
         media: post.data.media?.reddit_video?.fallback_url || null,
         permalink: post.data.permalink,
         author: post.data.author
       }));
-
+      
       return postsData;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
