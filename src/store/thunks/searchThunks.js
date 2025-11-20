@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { getImageUrl } from '../../helper/IsImage';
+import { getImageUrl } from '../../helper/isImage';
 // Helper function to check if URL is a direct image
 
 

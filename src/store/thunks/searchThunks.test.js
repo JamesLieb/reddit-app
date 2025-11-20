@@ -5,13 +5,13 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { fetchRedditSearch } from "./searchThunks";
 import axios from 'axios';
-import { getImageUrl } from '../../helper/IsImage';
+import { getImageUrl } from '../../helper/isImage';
 
 // Mock axios
 vi.mock('axios');
 
 // Mock the helper function
-vi.mock('../../helper/IsImage', () => ({
+vi.mock('../../helper/isImage', () => ({
   getImageUrl: vi.fn()
 }));
 

@@ -1,7 +1,7 @@
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { getImageUrl } from '../../helper/IsImage';
+import { getImageUrl } from '../../helper/isImage';
 
 // Async thunk for fetching popular posts
 export const fetchRedditPopular = createAsyncThunk(

@@ -4,7 +4,7 @@
 
 import { describe, it, expect, vi} from "vitest";
 import { render, screen } from "@testing-library/react";
-import { isImageUrl }  from "./IsImage.js";
+import { isImageUrl }  from "./isImage.js";
 import React from "react";
 
 // Mock Redux hooks
