@@ -3,12 +3,16 @@ import axios from 'axios';
 import { getImageUrl } from '../../helper/isImage';
 // Helper function to check if URL is a direct image
 
+const API_BASE_URL = process.env.NODE_ENV === 'production'
+  ? '/.netlify/functions/reddit-proxy'
+  : '/reddit-api';
+
 
 export const fetchRedditSearch = createAsyncThunk(
   'reddit/fetchRedditSearch',
   async (searchTerm, { rejectWithValue }) => {
     try {
-      const searchResponse = await axios.get('/reddit-api/search.json', {
+      const searchResponse = await axios.get(`${API_BASE_URL}/search.json`, {
         params: {
           q: searchTerm,
           limit: 25
