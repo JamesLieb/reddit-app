@@ -10,11 +10,12 @@ const API_BASE_URL = process.env.NODE_ENV === 'production'
 // Async thunk for fetching popular posts
 export const fetchRedditPopular = createAsyncThunk(
   'reddit/fetchRedditPopular',
-  async (searchTerm, { rejectWithValue }) => {
+  async (_ , { rejectWithValue }) => {
     try {
       // First, get search results from all of Reddit
-      const searchResponse = await axios.get(`${API_BASE_URL}/r/popular.json`, {
+      const searchResponse = await axios.get(API_BASE_URL, {
         params: {
+          endpoint: 'r/popular.json',
           limit: 25,   
       }
         });

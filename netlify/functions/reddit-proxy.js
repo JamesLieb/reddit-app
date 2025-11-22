@@ -14,7 +14,7 @@ exports.handler = async (event) => {
     const response = await axios.get(`https://www.reddit.com/${endpoint}`, {
       params: params,
       headers: {
-        'User-Agent': 'https://my-reddit-search-app.netlify.app/u/Ojmayo200'
+        'User-Agent': 'web:my-reddit-search-app.netlify.app:v1.0.0 (by /u/Ojmayo200)'
       }
     });
 

@@ -12,8 +12,9 @@ export const fetchRedditSearch = createAsyncThunk(
   'reddit/fetchRedditSearch',
   async (searchTerm, { rejectWithValue }) => {
     try {
-      const searchResponse = await axios.get(`${API_BASE_URL}/search.json`, {
+      const searchResponse = await axios.get(API_BASE_URL, {
         params: {
+          endpoint: 'search.json',
           q: searchTerm,
           limit: 25
         }
