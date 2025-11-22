@@ -20,6 +20,14 @@ export const fetchRedditSearch = createAsyncThunk(
         }
       });
 
+      console.log('Full response:', searchResponse.data);
+      
+      // Check if response has expected structure
+      if (!searchResponse.data || !searchResponse.data.data || !searchResponse.data.data.children) {
+        console.error('Unexpected response structure:', searchResponse.data);
+        throw new Error('Invalid response from Reddit API');
+      }
+
       const posts = searchResponse.data.data.children;
       console.log('Search posts:', posts);
 
@@ -27,7 +35,7 @@ export const fetchRedditSearch = createAsyncThunk(
         id: post.data.id,
         title: post.data.title,
         subreddit: post.data.subreddit,
-        url: getImageUrl(post), // Use helper function
+        url: getImageUrl(post),
         media: post.data.media?.reddit_video?.fallback_url || null,
         permalink: post.data.permalink,
         author: post.data.author
@@ -35,6 +43,7 @@ export const fetchRedditSearch = createAsyncThunk(
       
       return postsData;
     } catch (error) {
+      console.error('Error details:', error.response?.data || error.message);
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
