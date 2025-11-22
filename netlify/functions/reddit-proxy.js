@@ -4,31 +4,38 @@ exports.handler = async (event) => {
   const { queryStringParameters } = event;
   
   try {
-    const endpoint = queryStringParameters.endpoint || '';
+    const endpoint = queryStringParameters?.endpoint || '';
     const { endpoint: _, ...params } = queryStringParameters || {};
     
-    console.log('Requesting:', `https://www.reddit.com/${endpoint}`, 'with params:', params);
+    console.log('Making request to Reddit:', `https://www.reddit.com/${endpoint}`);
+    console.log('With params:', params);
     
     const response = await axios.get(`https://www.reddit.com/${endpoint}`, {
       params: params,
       headers: {
-        'User-Agent': 'web:my-reddit-search-app.netlify.app:v1.0.0 (by /u/your_reddit_username)'
+        'User-Agent': 'Mozilla/5.0 (compatible; reddit-app/1.0; +https://my-reddit-search-app.netlify.app) (by /u/ojmayo200)',
+        'Accept': 'application/json'
       }
     });
 
-    console.log('Response status:', response.status);
-    console.log('Response data structure:', Object.keys(response.data));
+    console.log('Success! Status:', response.status);
 
     return {
       statusCode: 200,
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
+        'Cache-Control': 'public, max-age=60'
       },
       body: JSON.stringify(response.data)
     };
   } catch (error) {
-    console.error('Full error:', error.response?.status, error.response?.data);
+    console.error('Reddit API Error:');
+    console.error('Status:', error.response?.status);
+    console.error('Status Text:', error.response?.statusText);
+    console.error('Data:', error.response?.data);
+    console.error('Headers:', error.response?.headers);
+    
     return {
       statusCode: error.response?.status || 500,
       headers: {
@@ -38,8 +45,10 @@ exports.handler = async (event) => {
       body: JSON.stringify({
         message: error.response?.data?.message || error.message,
         status: error.response?.status,
-        data: error.response?.data
+        statusText: error.response?.statusText,
+        redditError: error.response?.data
       })
     };
   }
 };
+
